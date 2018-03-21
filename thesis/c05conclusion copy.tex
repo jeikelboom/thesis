@@ -1,0 +1,128 @@
+\chapter{Conclusions}
+
+In this experiment we have build software that records a trace of student interactions.
+We have shown how the reasoning can take place with the help of lattices and progress vectors.
+
+\section{Research problem}\label{sec:questions}
+
+The objective to this research is to find answers to the following question:
+
+\begin{center}
+\textbf{\\How can a student model based on the \gls{tensteps} methodology be created and used in Ask-Elle for inner and outer loop behavior ?}
+\end{center}
+
+This question can be divided in the following subquestions.
+
+\begin{enumerate}[Q1.]
+\item How can a student model be used to diagnose learning problems such as missing prerequisites and forgotten or misunderstood topics?\\
+
+
+\item How can the student model be used to choose between possible interventions?\\
+Typical interventions are: reminding, persuasion, teaching and remediation \citep{loops}.
+
+\item How can the inner loop behavior be used for knowledge tracing in the student model?\\
+Completing exercises provides evidence of student mastery.
+In the \gls{tensteps} methodology the amount of guidance needed is an important indicator of student mastery.
+If different solutions are possible then each solution may provide evidence for mastery of different concepts.
+
+\item How can the outer loop control the scheduling of learning tasks and task classes following the \gls{tensteps} methodology?\\
+In the \gls{tensteps} the student can progress to the next task class when no procedural guidance is needed anymore.
+Variability of practice is important in the \gls{tensteps} methodology for a good transfer of learning.
+
+\item What is the impact of the student model on content authoring?\\
+Exercises and model solutions must be linked to domain concepts and learning objectives.
+This makes the authoring of artifacts more complex. 
+
+\item How can we build a lightweight knowledge representation and knowledge inference mechanism?\\
+Our objective is to find a lightweight approach that is adequate for the \gls{tensteps} approach.
+In the \gls{tensteps} knowledge engineering is positioned as an instructional design aspect in designing supportive information.
+Lightweight means that it is easy to extract the knowledge ontology from the course materials such as exercises and books.
+
+Some inference mechanism is needed to infer student knowledge from the interactions of the student with the tutor system.
+Many ITS's use algorithms such as Bayesian logic, fuzzy logic and machine learning \citep{chrysafiadi_2013}.
+These algorithms are heavyweight in the sense that they need specialized fitting of parameters, lots of data, and have a high computational complexity.
+The \gls{tensteps} has simple rules for task class promotion.
+It must be possible to find a lightweight inference mechanism without parameter fitting and computational problems to achieve this reasoning.
+
+\end{enumerate}
+
+
+\section{Research questions}
+So how does this answer the questions we posed in section \ref{sec:questions}?
+
+\begin{enumerate}[Q1.]
+\item How can a student model be used to diagnose learning problems such as missing prerequisites and forgotten or misunderstood topics?\\
+We have shown that we can test for missing prerequisites.
+It is possible to define a rule that display the missing prerequisites at the beginning of an exercise.
+We can define prequisites on the level of knowledge and point the student to relevant supportive information.
+
+\item How can the student model be used to choose between possible interventions?\\
+To be further investigated.
+
+\item How can the inner loop behavior be used for knowledge tracing in the student model?\\
+To be further investigated.
+
+\item How can the outer loop control the scheduling of learning tasks and task classes according the Ten Steps?\\
+We have shown that with careful definition of prerequisites and objectives the student guided through the exercises.
+We have structured the ontology model according to the TenSteps. 
+This allows the implementation of the relevant principles of the TenSteps.
+
+\item What is the impact of the student model on content authoring?\\
+Simple things are easy to implement. 
+By carefully defining prerequisites objectives and completion criteria it is possible to guide the student
+through the curriculum in a very adaptive way.
+It is not necessary to store this centrally in the model. 
+These components can be stored with the exercises in a domain reasoner and to retrieve them with additional services.
+
+\item How can we build a lightweight knowledge representation and knowledge inference mechanism?\\
+As we have shown, the mathematical lattice theory and partial orderings ar a natural fit to describe student progress.
+By defining exercise and task class objectives and prerequisites as destinations we can guide 
+the student on his route to an end-goals in a similar way as a car navigation system guides the driver to his destination.
+We just have more then two dimensions.
+
+\end{enumerate}
+
+\section{Threats to validity}
+\begin{itemize}
+\item Other use cases might present challenges to transformation of domain reasoner responses to step vector.
+There may be situations where counting rules is not appropriate.
+
+\item A central principle in the TenSteps is whole task support in exercises.
+The material that we considered here is only a prelude for exercises of more complexity.
+The TenSteps recognises that it is sometimes necessary to learn constituent skills before a complete task can be attempted.
+A significant part of the TenSteps can be applied in this situation also.
+
+
+\item The theories have only been tested against fictitious scenarios, not with real students.
+\item The exercises are executed with simplified domain reasoners, also specifically designed for this experiment.
+\item We have assumed that domain reasoners be adapted to interface with our ontology.
+There is no adapted domain reasoner, and we have not run it end to end.
+\end{itemize}
+
+
+
+\section{Future work}
+
+We hope this experiment will encourage other researcher to explore domain reasoners, the TenSteps and lattice theory as a basis for \gls{its} design.
+
+As this is a first attempt to create an outer loop for domain reasoners a lot of questions remain.
+
+\begin{itemize}
+
+\item We have only carried out very limited experiments to run our inference mechanism with other existing domain reasoners.
+\item Our engine may be sensitive to rule orderings and overlapping conditions.
+To ease the reasoning about this we have required monotone growth of the model.
+How can we formally find and test under which conditions a fixpoint will be reached?
+\item How can the system be formally model tested and verified.
+It is possible to define constraints on the ontology.
+In model testing constraints are defined for safety, fairness and liveliness.
+If we start a task class, then there must always be a path complete it successfully.
+We can ask a domain reasoner for a set of model solutions for an exercises. 
+In that case each solution must successfully complete the exercise.
+\item Is it possible to integrate our lattice datatype with existing inferencing engines such as Pellet or Drools.
+\item Can this lattice theory of progress vectors be of use in other business rule engines in other domains then \gls{its}.
+\end{itemize}
+
+
+
+

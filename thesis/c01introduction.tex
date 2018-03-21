@@ -1,0 +1,172 @@
+\chapter{Introduction}
+The internet has changed the pace of development in many fields. 
+Working with constantly changing technology puts pressure on professionals to keep up to date.
+Knowledge workers need updates on skills every few years and lifelong learning has become a fact of life \citep{lifelonglearning}.
+E-learning is a way to meet the growing demand for training and education.
+E-learning solutions in the form of Computer Based Training (\gls{cbt}) or Computer Aided instruction (\gls{cai}) have existed for several decades \citep{woolf_2010}.
+
+An Intelligent Tutoring System (\gls{its}) is an E-learning system in which intelligent technology is used to support working on exercises.
+The tutor gives hints and feedback on steps during the exercises.
+Intelligent Tutors have been built for several domains,  in mathematics, physics, programming in Lisp  \citep{tutor-pat, tutor-andes, anderson1986}, etc. 
+
+\Glspl{domainreasoner} from the  IDEAS\footnote{\url{http://ideas.cs.uu.nl}}  project are an intelligent technology that can be used in an \gls{its}.
+These \glspl{domainreasoner} can evaluate if the student is still on the right track with an exercise, diagnose an error or give hints which step to take if the student is stuck.
+The Ask-Elle Tutor uses domain reasoners to support students with functional programming  exercises in the Haskell programming language \citep{Gerdes2017}. 
+
+
+These \glspl{domainreasoner} have a stateless architecture. 
+However, an \gls{its} must keep state to keep track of a students progress with exercises, and knowledge gained.
+The \gls{studentmodel} is the part that keeps information per student.
+Different students may have different learning behaviour, and some need more exercises than others. 
+The \gls{studentmodel} makes the \gls{its} adaptive to such needs.
+
+The Ten steps/Four component is an instructional design methodology for learning complex skills \citep{kirschner_2013}.
+In this research we investigate how a student model can be designed for \gls{its} with domain reasoners from the IDEAS project, following the \gls{tensteps}.
+
+
+
+\section{Prior work}
+This research is based upon work from different research areas, and aims at integrating concepts from these areas.
+
+\subsection{Intelligent Tutor Systems and student models}
+Intelligent Tutors have existed for several decades \citep{woolf_2010}. 
+One of the first tutors in the area of programming is the Lisp tutor \citep{anderson1986}.
+
+\glspl{its} maintain data on student progress in a student model. 
+The general principles in student modelling were described by \citet{studentModelling} and  \citet{brusilovskiy_1993, brusilovsky_1994}.
+Reasoning about student knowledge is difficult as we cannot observe student knowledge directly.
+We can collect evidence of student knowledge by observing external behavior.
+This may be difficult to interpret. For example, when answering a multiple choice question the student can make a \gls{lucky} or a \gls{slip}.
+
+Many systems use statistical methods for inferencing in the student model. 
+Knowledge tracing is a statistical inferencing method based on Bayesian statistics   \citep{corbett_1995}.
+Knowledge spaces theory (\gls{kst}) was developed to improve assessment methods  \citep{doignon_falmagne_2016}. 
+\gls{kst} is based on knowledge states that have prerequisite relationships, for efficient selection of questions in an assessment.
+A student model can use the same principles for selecting exercises, hints or feedback.
+
+Many researchers use semantic web technology to build the student model as ontology \citep{ontology}.
+Semantic web technology uses description logic for reasoning with the open world principle \citep{dl2007}. 
+The open world principle assumes that it must reason with incomplete information.
+This contrasts with the closed world reasoning were it is assumed that all information is available.
+Students often acquire much knowledge outside the \gls{its}, e.g. by searching the internet or reading books. 
+When the \gls{its} has incomplete information on student knowledge, an open world reasoner is needed.
+
+
+Student Modelling is a subtopic in the area of User Modelling.
+A user model keeps track of the users preferences and cognitive states, that are derived from the interaction history.
+The user model is used to make software adaptive to user needs by generating help or recommendations, for example in web shops, wordprocessors or music players.
+User modelling in intelligent user interfaces is an active research area \citep{Brusilovsky2007}.
+
+Student modelling is a large research area.
+Chrysafiadi and Virvou performed a literature review on approaches for student modelling \citep{chrysafiadi_2013}.
+VanLehn described the behaviour of Tutoring systems in terms of an inner and outer loop.
+The inner loop uses intelligent technology for conducting an exercise.
+The outer loop selects exercises and guides the student through te curriculum \citep{vanlehn2006}.
+The student model helps to make these loops adaptive to student needs.
+In a later article loops were described as  feedback loops \citep{loops}.
+
+Developing a student model has software engineering dimensions, such as  requirements analysis and architecture \citep{Hatzilygeroudis2004, Jeremi2004}.
+Any student model starts with log data. 
+The PSLC DataShop collects logdata from \glspl{its} in many domains   \citep{VanLehn2007}.
+This requires attention to qualities such as security, privacy and standardisation of dataformats.
+
+
+
+\subsection{Educational theories for \gls{its} design}
+Theories of learning play an important role in the development of any \gls{its},
+and vice versa \glspl{its} have also inspired the forming of learning theories. 
+The Lisp tutor was based on the \gls{actr} theory of cognition \citep{anderson_1996}. 
+Problem solving tasks can be carried out by executing a set of rules.
+The human mind must contain large numbers of rules, some of which are obtained in exercises with an ITS.
+Novices learn rules and apply them step by step, whereas experts apply rules automatically \citep{skill}.
+The exercises in an \gls{its} are designed to automate rule application in the mind.
+
+In this thesis we follow the \gls{tensteps} for instructional design.
+This is a methodology for learning complex skills. 
+The methodology is based on learning theories such as \gls{actr}.
+
+
+\subsection{IDEAS domain reasoners in Functional Programming}
+
+The IDEAS project has developed domain reasoners that can track the steps in a solution strategy in an exercise \citep{ideas1, UUCS2014005}.
+These domain reasoners can be applied in many domains; logic, geometry, microprocessor programming or imperative programming \citep{p43-keuning}.
+In this paper we concentrate on domain reasoners in the area of functional programming in Haskell.
+Many universities teach Haskell to students to become acquainted with functional programming concepts \citep{hutton_2016}.
+
+The Haskell Expression Evaluator (\gls{hee}) is a tutor with which the student can stepwise evaluate Haskell expressions \citep{tutorHEE}. 
+Understanding expression evaluation is essential for the understanding of functional programming.
+Students with a background in imperative program have to make a mind shift when starting with Haskell.
+
+The \gls{askelle} tutor can conduct exercises where the student has to create a small function in Haskell \citep{ideas2}.
+\Gls{askelle} can conduct class 3 exercises \citep{exerciseClasses}, where there are multiple solutions strategies \citep{Gerdes2017}.
+
+
+\section{Our contribution: lightweight student modelling.}
+
+\subsection{Problem statement and research question}
+\label{sec:problstmt}
+The above mentioned IDEAS tutors are stateless. 
+The tutor does not keep track of which exercises the student has completed.
+The outer loop of Ask-Elle is a menu of exercises. 
+
+As a student progresses through the curriculum we must recommend exercises that are not too difficult and not too easy.
+The outer loop of an \gls{its}   recommends exercises and  should adapt to student needs and preferences. 
+A fast student may skip exercises that are too easy, the system must not insist on completing easier exercises even when they are prerequisite.
+A slow student may need  more exercises.
+
+Information on student progress is kept in a student model.
+The student model can be queried during exercises, to choose between interventions. 
+Typical interventions are: reminding, persuasion, teaching and remediation \citep{loops}.
+
+Exercises and model solutions must be linked to domain concepts and learning objectives.
+The model must make it easy for the author to specify exercises.
+
+The student model must be updated after each step. 
+Some inferencing mechanism is needed to infer the students cognitive state from the task step history.
+Machine learning and Bayesian models are often used as intelligent technology for knowledge inferencing.
+These technologies require a lot of data and effort to set up and parameterise.
+We are looking for a lightweight solution for knowledge representation and knowledge inferencing.
+This must be easy to implement in research and development situations where resources are limited.
+
+The central question in this research is how we can build a lightweight student model that supports the \gls{tensteps} and meets the requirements mentioned.
+
+\subsection{Our solution}
+An overlay model is a model that overlays a domain model, by assigning a value to each domain concept.
+Overlay models are often used as the first step for introduction of a student model.
+Most \glspl{its} use an overlay model in their student model, often combined with other approaches \citep{chrysafiadi_2013}.
+
+We use lattice theory to develop an overlay model and a rule system for knowledge tracing. 
+The ruleset follows the \gls{tensteps}, but is not specific for any domain.
+The author only has to specify properties for exercises.
+
+We show how the problems mentioned above are solved in some scenarios from a functional programming curriculum.
+We found that the scenarios specified could be implemented with a very limited ruleset.
+With this approach a student model can be introduced in a new \gls{its} with limited effort.
+
+
+
+\subsection{Thesis organisation}
+This thesis is organised as follows. 
+Chapter 2 discusses the components that provide the foundation for our work.
+We combine concepts from the \gls{tensteps}, mathematics (lattice theory), domain reasoners and \gls{its} and functional programming.
+This chapter provides a brief introduction to these concepts.
+Our method for student modelling and inferencing is explained in chapter 3.
+In chapter 4 we demonstrate how this works for some scenarios.
+In chapter 5 we analyse the threats to validity, the conclusions and future work.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

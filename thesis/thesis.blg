@@ -1,0 +1,79 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+The style file: plainnat.bst
+A level-1 auxiliary file: c00titlepage.aux
+A level-1 auxiliary file: c01introduction.aux
+A level-1 auxiliary file: c02context.aux
+A level-1 auxiliary file: c03btheory.aux
+A level-1 auxiliary file: c04validation.aux
+A level-1 auxiliary file: c05conclusion.aux
+Database file #1: tutor.bib
+Name 1 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1347 of file plainnat.bst
+Name 1 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1347 of file plainnat.bst
+Name 2 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1347 of file plainnat.bst
+Name 3 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1347 of file plainnat.bst
+Warning--empty booktitle in Brusilovsky2007
+Warning--can't use both author and editor fields in doignon_falmagne_2016
+Warning--can't use both author and editor fields in Hatzilygeroudis2004
+Warning--can't use both author and editor fields in Jeremi2004
+Name 1 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Name 2 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Name 3 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Name 1 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Name 2 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Name 3 in "Nguyen-Thinh Le, and F. Loll, and N. Pinkwart," has a comma at the end for entry exerciseClasses
+while executing---line 1429 of file plainnat.bst
+Warning--can't use both author and editor fields in studentModelling
+Warning--can't use both author and editor fields in VanLehn2007
+You've used 33 entries,
+            2773 wiz_defined-function locations,
+            812 strings with 10917 characters,
+and the built_in function-call counts, 15302 in all, are:
+= -- 1368
+> -- 770
+< -- 33
++ -- 264
+- -- 231
+* -- 1164
+:= -- 2301
+add.period$ -- 104
+call.type$ -- 33
+change.case$ -- 170
+chr.to.int$ -- 33
+cite$ -- 72
+duplicate$ -- 774
+empty$ -- 1325
+format.name$ -- 282
+if$ -- 3294
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 43
+newline$ -- 173
+num.names$ -- 132
+pop$ -- 378
+preamble$ -- 1
+purify$ -- 143
+quote$ -- 0
+skip$ -- 576
+stack$ -- 0
+substring$ -- 591
+swap$ -- 124
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 313
+warning$ -- 6
+while$ -- 141
+width$ -- 0
+write$ -- 448
+(There were 10 error messages)

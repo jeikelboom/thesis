@@ -1,0 +1,207 @@
+\begin{thebibliography}{33}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ameen et~al.(2012)Ameen, Khan, and Rani]{ontology}
+Ayesha Ameen, Khaleel Ur~Rahman Khan, and B~Padmaja Rani.
+\newblock Ontological student profile.
+\newblock In \emph{Proceedings of the Second International Conference on
+  Computational Science, Engineering and Information Technology}, CCSEIT '12,
+  pages 466--471, New York, NY, USA, 2012. ACM.
+
+\bibitem[Anderson(1996)]{anderson_1996}
+John~R. Anderson.
+\newblock {ACT: a simple theory of cognition}.
+\newblock \emph{American Psychologist}, 51(4), 1996.
+
+\bibitem[Anderson et~al.(1989)Anderson, Conrad, and Corbett]{anderson1986}
+John~R. Anderson, Frederick~G. Conrad, and Albert~T. Corbett.
+\newblock {Skill acquisition and the LISP tutor.}
+\newblock \emph{Cognitive Science}, 13\penalty0 (4):\penalty0 467 -- 505, 1989.
+
+\bibitem[Baader et~al.(2007)Baader, Calvanese, McGuiness, Nardi, and
+  Patel-Schneider]{dl2007}
+Franz Baader, Diego Calvanese, Deborah~L. McGuiness, Danielle Nardi, and
+  Peter~F Patel-Schneider.
+\newblock \emph{The description logic handbook}.
+\newblock Cambridge University Press, 2007.
+
+\bibitem[Bhalerao et~al.(2017)Bhalerao, Ranade, and Vaidya]{BHALERAO201756}
+Supriya Bhalerao, Anagha Ranade, and Ashok~D.B. Vaidya.
+\newblock Bloom's taxonomy reiterates pramana.
+\newblock \emph{Journal of Ayurveda and Integrative Medicine}, 8\penalty0
+  (1):\penalty0 56 -- 57, 2017.
+
+\bibitem[Brusilovsky and Mill\'{a}n(2007)]{Brusilovsky2007}
+P.~L. Brusilovsky and E.~Mill\'{a}n.
+\newblock The adaptive web.
+\newblock pages 3--53. Springer-Verlag, Berlin, Heidelberg, 2007.
+
+\bibitem[Brusilovsky(1992)]{brusilovskiy_1993}
+P.L. Brusilovsky.
+\newblock The construction and application of student models in intelligent
+  tutoring systems.
+\newblock \emph{Journal of Computer and Systems Sciences International}, 32(1)
+  (1994), 1992.
+
+\bibitem[Brusilovsky(1994)]{brusilovsky_1994}
+P.L. Brusilovsky.
+\newblock Student model centered architecture for intelligent learning
+  environments.
+\newblock In \emph{Fourth international conference on User Modeling}, 1994.
+
+\bibitem[Chrysafiadi and Virvou(2013)]{chrysafiadi_2013}
+Konstantina Chrysafiadi and Maria Virvou.
+\newblock Student modeling approaches: A literature review for the last decade.
+\newblock \emph{Expert Systems with Applications}, Volume 40, 2013.
+
+\bibitem[Corbett and Anderson(1995)]{corbett_1995}
+Albert~T. Corbett and John~R. Anderson.
+\newblock Knowledge tracing: Modeling the {A}cquisition of {P}rocedural
+  {K}nowledge.
+\newblock \emph{User Modeling and User-Adapted Interaction}, 4:\penalty0
+  253--278, 1995.
+
+\bibitem[Doignon and Falmagne(2016)]{doignon_falmagne_2016}
+Jean-Paul Doignon and Jean-Claude Falmagne.
+\newblock \emph{Knowledge spaces and learning spaces}, volume~1 of
+  \emph{Cambridge Handbooks in Psychology}, pages 274--321.
+\newblock Cambridge University Press, 2016.
+
+\bibitem[Gerdes et~al.(2010)Gerdes, Heeren, and Jeuring]{ideas1}
+Alex Gerdes, Bastiaan Heeren, and Johan Jeuring.
+\newblock Properties of exercise strategies.
+\newblock In \emph{First International Workshop on Strategies in Rewriting,
+  Proving and Programming (IWS2010)}, volume EPTCS 44, pages 21--34, 12 2010.
+
+\bibitem[Gerdes et~al.(2017)Gerdes, Heeren, Jeuring, and van
+  Binsbergen]{Gerdes2017}
+Alex Gerdes, Bastiaan Heeren, Johan Jeuring, and L.~Thomas van Binsbergen.
+\newblock {Ask-Elle}: an adaptable programming tutor for haskell giving
+  automated feedback.
+\newblock \emph{International Journal of Artificial Intelligence in Education},
+  27\penalty0 (1):\penalty0 65--100, 2017.
+
+\bibitem[Gertner and VanLehn(2000)]{tutor-andes}
+Abigail~S Gertner and Kurt VanLehn.
+\newblock Andes: A coached problem solving environment for physics.
+\newblock In \emph{International conference on intelligent tutoring systems},
+  pages 133--142. Springer, 2000.
+
+\bibitem[Hatzilygeroudis and Prentzas(2004)]{Hatzilygeroudis2004}
+Ioannis Hatzilygeroudis and Jim Prentzas.
+\newblock \emph{Knowledge Representation Requirements for Intelligent Tutoring
+  Systems}, pages 87--97.
+\newblock Springer Berlin Heidelberg, 2004.
+
+\bibitem[Heeren and Jeuring(2014)]{UUCS2014005}
+Bastiaan Heeren and Johan Jeuring.
+\newblock Feedback services for stepwise exercises.
+\newblock \emph{Science of Computer Programming}, 88:\penalty0 110 -- 129,
+  2014.
+
+\bibitem[Hutton(2016)]{hutton_2016}
+Graham Hutton.
+\newblock \emph{Programming in Haskell}.
+\newblock Cambridge University Press, second edition edition, 2016.
+
+\bibitem[Jeremi{\'{c}} and Deved{\v{z}}i{\'{c}}(2004)]{Jeremi2004}
+Zoran Jeremi{\'{c}} and Vladan Deved{\v{z}}i{\'{c}}.
+\newblock \emph{Student Modeling in Design Pattern ITS}, pages 299--305.
+\newblock Springer Berlin Heidelberg, 2004.
+
+\bibitem[Jeuring et~al.(2014)Jeuring, van Binsbergen, Gerdes, and
+  Heeren]{ideas2}
+Johan Jeuring, L.~Thomas van Binsbergen, Alex Gerdes, and Bastiaan Heeren.
+\newblock Model solutions and properties for diagnosing student programs in
+  {Ask-Elle}.
+\newblock In \emph{Proceedings of the Computer Science Education Research
+  Conference}, CSERC '14, pages 31--40, New York, NY, USA, 2014. ACM.
+
+\bibitem[Keuning et~al.(2014)Keuning, Heeren, and Jeuring]{p43-keuning}
+Hieke Keuning, Bastiaan Heeren, and Johan Jeuring.
+\newblock Strategy-based feedback in a programming tutor.
+\newblock In \emph{Proceedings of the Computer Science Education Research
+  Conference}, CSERC '14, pages 43--54, New York, NY, USA, 2014. ACM.
+
+\bibitem[Koedinger et~al.(1997)Koedinger, Anderson, Hadley, and
+  Mark]{tutor-pat}
+Kenneth~R. Koedinger, John~R. Anderson, William~H. Hadley, and Mary~A. Mark.
+\newblock Intelligent tutoring goes to school in the big city.
+\newblock \emph{International Journal on Artificial Intelligence in Education},
+  8:\penalty0 30--43, 1997.
+
+\bibitem[Kruchten(2015)]{lifelonglearning}
+Philippe Kruchten.
+\newblock Lifelong learning for lifelong employment.
+\newblock \emph{IEEE Software}, July/August 2015.
+
+\bibitem[Le et~al.(2013)Le, Loll, and Pinkwart]{exerciseClasses}
+Nguyen-Thinh Le, F.~Loll, and N.~Pinkwart.
+\newblock Operationalizing the continuum between well-defined and ill-defined
+  problems for educational technology.
+\newblock \emph{IEEE Transactions on Learning Technologies}, 6\penalty0
+  (3):\penalty0 258--270, 2013.
+
+\bibitem[Olmer et~al.(2014)Olmer, Heeren, and Jeuring]{tutorHEE}
+Tim Olmer, Bastiaan Heeren, and Johan Jeuring.
+\newblock Evaluating haskell expressions in a tutoring environment.
+\newblock \emph{Trends in Functional Programming in Education}, EPTCS
+  170:\penalty0 50--66, 2014.
+
+\bibitem[Reimann et~al.(2013)Reimann, Kickmeier-Rust, and Albert]{TUGraza}
+Peter Reimann, Michael Kickmeier-Rust, and Dietrich Albert.
+\newblock Problem solving learning environments and assessment: A knowledge
+  space theory approach.
+\newblock \emph{Computers and Education}, 64, 2013.
+
+\bibitem[Saunders~MacLane(1988)]{algebra}
+Garrett~Birkhoff Saunders~MacLane.
+\newblock \emph{Algebra}.
+\newblock AMS Chelsea publishing, third edition, 1988.
+
+\bibitem[van Merri{\"e}nboer and Kirschner(2013)]{kirschner_2013}
+Jeroen J.~G. van Merri{\"e}nboer and Paul~A. Kirschner.
+\newblock \emph{Ten steps to complex learning}.
+\newblock Routledge, New York, second edition, 2013.
+
+\bibitem[VanLehn(1988)]{studentModelling}
+Kurt VanLehn.
+\newblock \emph{Foundations of Intelligent Tutoring System}, chapter Student
+  Modelling.
+\newblock Lawrence Erlbaum Associate Publishers, 1988.
+
+\bibitem[VanLehn(1996)]{skill}
+Kurt VanLehn.
+\newblock Cognitive skill acquisition.
+\newblock \emph{Annu. Rev. Psychol.}, Vol 47:\penalty0 pages 513:539, 1996.
+
+\bibitem[VanLehn(2006)]{vanlehn2006}
+Kurt VanLehn.
+\newblock The behavior of tutoring systems.
+\newblock \emph{Int. J. Artif. Intell. Ed.}, 16\penalty0 (3):\penalty0
+  227--265, 2006.
+
+\bibitem[VanLehn(2016)]{loops}
+Kurt VanLehn.
+\newblock Regulative loops, step loops and task loops.
+\newblock \emph{International Journal on Artificial Intelligence in Education},
+  26:\penalty0 107--112, 2016.
+
+\bibitem[VanLehn et~al.(2007)VanLehn, Koedinger, Skogsholm, Nwaigwe, Hausmann,
+  Weinstein, and Billings]{VanLehn2007}
+Kurt VanLehn, Kenneth~R. Koedinger, Alida Skogsholm, Adaeze Nwaigwe, Robert
+  G.~M. Hausmann, Anders Weinstein, and Benjamin Billings.
+\newblock \emph{What's in a Step? Toward General, Abstract Representations of
+  Tutoring System Log Data}, pages 455--459.
+\newblock Springer Berlin Heidelberg, 2007.
+
+\bibitem[Woolf(2010)]{woolf_2010}
+Beverly~Park Woolf.
+\newblock \emph{Building Intelligent Interactive Tutors}.
+\newblock Morgan Kaufmann, Burlington, Massachusets, second edition, 2010.
+
+\end{thebibliography}

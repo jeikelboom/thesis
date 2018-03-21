@@ -1,0 +1,257 @@
+\chapter{Conclusions}
+
+In this chapter we will evaluate how the research questions have been answered, and draw some conclusions.
+The section on future work describes some new questions and opportunities that arise from the rule system we described.
+ 
+
+
+
+\section{Research questions}\label{sec:questions}
+
+The objective of this research is to find answers to the following question:
+
+\begin{center}
+\textbf{\\How can a student model based on the \gls{tensteps} be created and used in Ask-Elle for inner and outer loop behaviour ?}
+\end{center}
+
+This question can be divided in the following subquestions.
+
+\begin{enumerate}[Q1.]
+\item How can a student model be used to diagnose learning problems such as missing prerequisites and forgotten or misunderstood topics?\\
+
+\textbf{Answer}\\
+Missing prerequisites can be detected at the beginning of the exercise using predicates discussed in section \ref{sec:exrecquer}.
+This only means that the student model has no evidence that the student masters the concept.
+The student may have acquired the prerequisite knowledge outside the \gls{its}.
+A warning message is displayed, but student may continu the exercise.
+
+A buggy rule may fire that indicates a problem with a prerequisite. 
+If the student model indicates that the student in fact meets the prerequisites, we conclude the item is forgotten and otherwise it is a missing prerequisite.
+When a buggy rule fires that is not related to a prerequisite, it is a misconception that must be addressed in this module. 
+
+
+\item How can the student model be used to choose between possible interventions?\\
+Typical interventions are: reminding, persuasion, teaching and remediation \citep{loops}.
+
+\textbf{Answer}\\
+Persuasion is used for variations in exercises.
+In section \ref{sec:variat} we showed how a student can be persuaded to a specific variation of an exercise.
+
+In case of a problem, the intervention depends on the diagnosis.
+If an item is forgotten, we can show a pointer to supportive information to remind the student.
+A missing prerequisite needs teaching, the student is referred to the prerequisite module.
+In case of misconception some remediation can be offered by referring the student to a part-task practice.
+
+
+\item  Completing exercises provides evidence of student mastery.
+In the \gls{tensteps}  the amount of guidance needed is an important indicator of student mastery.
+If different solutions are possible then each solution may provide evidence of mastery of different concepts.\\
+How can the inner loop behavior be used for knowledge tracing in the student model?
+
+\textbf{Answer}\\
+If procedural support is given or an error made, the student part of the model is not updated.
+The exercises is left in the state INCOMPLETE or ERROR.
+This may be refined further (section \ref{sec:refinem}).
+In the examples we showed how the step vector is used to update the DR.rules vector for this purpose.
+
+There are many other kinds of updates possible with a step vector.
+In case a hint is given, the student model can be update directly without any rules.
+For example, the PiBloom level of knowledge can be set on the hinted topic.
+If the hint is requested again the student we may encouraged to try to solve it himself.
+
+
+A step vector can add some values to  the objectives vector. 
+In case of successful completion these will be included in the student model, as we showed in section \ref{sec:variat} with the syntax variations.
+
+
+\item How can the outer loop control the scheduling of learning tasks and task classes following the \gls{tensteps}?\\
+In the \gls{tensteps} the student can progress to the next task class when no procedural guidance is needed anymore.
+Variability of practice is important in the \gls{tensteps}  for a good transfer of learning.
+
+\textbf{Answer}\\
+We have shown that we only update the model after successful completion of exercises.
+This contributes to certainty that the student masters the exercise.
+
+In the outer loop examples we showed that exercise selection can be refined as desired for progressing levels of difficulty.
+We did the same for variability in the inner loop examples.
+This mechanism may also be used to implement \gls{madapt} \citep{vanlehn2006}.
+
+For task classes a rule may be defined similar to the success rule for learning tasks.
+Taks classes can only be finished successfully or remain unfinished.
+
+\item What is the impact of the student model on content authoring?\\
+Exercises and model solutions must be linked to domain concepts and learning objectives.
+This makes the authoring of artifacts more complex. 
+
+\textbf{Answer}\\
+Our model is declarative with regard to educational properties. 
+It is not necessary to write extra rules or algorithms to add new exercises.
+
+Domain concepts and levels of learning can be used in the student model and re-used as prerequisites and objectives.
+This effort is scalable in the sense that it may require more work, but will result in a more educationally sound solution.
+
+
+\item How can we build a lightweight knowledge representation and knowledge inference mechanism?\\
+
+\textbf{Answer}\\
+Many \glspl{its} use algorithms such as Bayesian logic, fuzzy logic and machine learning \citep{chrysafiadi_2013}.
+The mechanism we described is lightweight compared with these solutions.
+Our prototype is only three Haskell modules with about 500 \gls{loc} to define the progress indicators, the rules for \gls{tensteps}.
+It requires little parameterisation, and is driven by domain concepts and levels of learning.
+
+Even in a large curriculum we do not anticipate performance problems.
+Our engine loops over all task classes and learning tasks.
+The engine can be optimised  per rule to just select the current task or task class.
+
+We have no functionality for evaluation and prediction of student performance.
+Other approaches have better support in this area.
+
+\end{enumerate}
+
+\section{Conclusions}
+
+Development of an \gls{its} is a risky and complex undertaking.
+A lightweight approach facilitates fast and easy creation of a student model early in the lifecycle.
+Following the \gls{tensteps} and designing a student model adds an educational dimension to exercise creation. 
+
+Some intelligent technology is required to reason about student progress and determine interventions and recommendations.
+We have used the blueprints from the \gls{tensteps} to structure our educational and student model.
+Partial orderings and lattices are mathematical structures, that are useful to reason about curricula. 
+The knowledge space theory, for example, uses partial orderings, and so do we in our model.
+
+We have defined a model and a rule system with the following properties.
+
+\begin{itemize}
+\item Our rule system can be used for outer loop navigation, and for inner loop interventions.
+\item We only had to define 5 rules for navigation and interventions.
+The model and the rules follow the blueprints of the \gls{tensteps}.
+\item The rules work well with class 1 and class 2 exercises.
+\item Working with class 3 exercises may require additional rules to reason about constraints.
+Our system can be expanded in various ways (see Section \ref{sec:futwrok}).
+\item The rules are not specific for any knowledge domain.
+\item Exercises, navigation and interventions can be defined declaratively.
+Authors only have to specify properties.
+\item The system is easy to understand for both students and instructors.
+The system advices, but does not take over responsibilities.
+\end{itemize}
+
+This approach is suitable for a light weight student model. 
+It does not present challenges in computational complexity.
+It requires limited resources, and can be useful in the early phases of the lifecycle of an \gls{its}.
+Other student modelling  approaches \citep{corbett_1995} require more work to set up and parameterise.
+These models offer more functionality than our approach.
+For example, our model has no facilities to predict student performance in exams.
+
+
+
+\section{Future work}
+\label{sec:futwrok} 
+
+We have explored some of the possibilities of a lattice based student model.
+We have build a only a proof of concept, however the experience indicates that this is a promising direction.
+We feel that we have only shown the top of the iceberg and that this approach has many more possibilities.
+In this section we show that there are plenty of ideas, to encourage futher research in this direction.
+
+\subsection{Expansions}
+
+
+
+\subsubsection{Refinements for procedural support}
+\label{sec:refinem}
+Our model may be a little coarse.
+We have no separate state for an abandoned exercise, or an exercise where procedural support  was given.
+We do not keep track of the amount of hints and procedural support given.
+Sometimes a student needs some encouragement to try it himself, and maybe the system should restrict the amount of support.
+How can this be further refined and give more refined amount of procedural support?
+
+\subsubsection{Other educational technologies}
+We have tested the model with domain reasoners from the IDEAS project.
+Maybe it is possible to use the model with other educational technologies.
+If  a step vector can be derived from student interactions then the model can be updated.
+The model will then contain more information on the student cognitive state and learning preferences.
+For example an intake form with multiple choice questions may be used to update the student model.
+The knowledge space theory reasoning capabilities can be used to select questions based on previous answers.
+
+\subsubsection{Application in other domains}
+Our model in not very domain specific. It may be applied in other domains.
+
+\subsubsection{Class 3 domain reasoners}
+Further experiments in different domains are required to draw conclusions on domain reasoners for class 3 problems in combination with our model.
+There may even be differences per domain e.g. SQL, imperative programming and functional programming.
+What are the design aspects of domain reasoners for class 3 problems in combination with the student model?
+Domain reasoner need to be adapted to generate step vectors to update the model.
+
+
+\subsection{Improvements of the underlying rule engine}
+
+We have tried to implement a student model in OWL/SWRL.
+OWL/SWRL is based on description logics.
+Description logics allow lightweight and  monotonic reasoning, where new facts can asserted.
+This is what we need in a student model where information is only added.
+Theoretically this should work fine together, but we found it difficult to reason with time dimensions in OWL/SWRL.
+More research is required to integrate temporal logic, description logic and lattice theory, to build a more generic rule engine.
+
+\subsubsection{Accumulating results over time}
+
+
+Step vectors are called asserted facts, output from rules are called inferred facts.
+We obtain a series of stepvectors $\{\mathit{SV_{1}, \;SV_{2}... \;SV_{n}} \}$ from the user dialog.
+The first model $M_{0}$ is an asserted model obtained from the courseware author.
+$M_{0}$ contains the definitions of learning tasks and an empty student model.
+The rule engine is a function $\mathit{re}$ that calculates  the next version of the model from the current version by joining rule results until a fixpoint is reached.
+In our prototype we generate a series of models $\mathit{M_{n} = re (M_{n-1} \addjoin SV_{n})}$, that contain asserted and inferred facts.
+
+Another approach would be to first calculate a series of models with only asserted facts: $\{\mathit{AM_{1}, \;AM_{2}... \;AM_{n}} \}$,
+where  $\mathit{AM_{n} = AM_{n-1} \addjoin SV_{n}}$ and $\mathit{AM_{0} = M_{0}}$.
+The rule engine is then applied to these models: $\mathit{M_{n} = re (AM_{n})}$.
+The inferred facts are not carried over from step to step, and this relaxes the restriction of the model increasing monotonic.
+
+\subsubsection{Monotonic reasoning}
+We experimented with OWL/SWRL. 
+This is a lightweight inferencing system, based on description logic, and supports open world reasoning.
+This system is not very sensitive to rule execution order, and avoids conflicting rules with monotonous reasoning.
+We are monotonous in the sense of the model increasing monotonic in partial ordering.
+We have lost some of the advantages of monotonous reasoning.
+In our model many rules may influence each other.
+We avoided this problem by defining rules on predicate combinations that exclude each other.
+This is in general not the case and may introduce complexity such as setting priorities on rules.
+More research is needed how to improve on this point.
+
+\subsubsection{Other rule systems}
+Our rule engines is dedicated to support the \gls{tensteps}. 
+Perhaps it is possible to integrate the lattice reasoning in existing rule engines to build a more generic solution.
+
+\subsubsection{Explanations}
+A student may disagree or wonder how the system concluded that he understands e.g. recursion.
+Sometimes an explanation facility is needed to explain which rules and assertions have resulted in certain facts.
+Our system does not have such a mechanism.
+
+
+\subsection{Lifecycle and migration}
+
+When an \gls{its} matures, more functionality will be required.  
+
+\subsubsection{Metrics and performance predictions}
+We have not explored any possibility to use the model to evaluate student knowledge or to make predictions on performance.
+Perhaps querying learning curves can provide metrics on student performance.
+
+\subsubsection{Counters for individual learning curves.}
+Some students may need more exercises than others and therefore the educational model may be parameterised with counters per individual.
+It may be useful to be able to make rules with conclusions that are added to the model ($\addjoin$) instead of joined ($\lor$).
+If such rules keep firing, a fixpoint is never reached and the engine enters an infinite loop.
+This can be solved by defining one-shot rules.
+
+\subsubsection{Multi dimensional indicators}
+We used the PiBloom indicator to state the level of learning.
+Such a value can probably be augmented with extra information indicating how often or with what probability this is asserted.
+
+\subsubsection{Migration}
+We have developed the model as a starting point in the early lifecycle of an \gls{its}.
+A model based on Bayesian statistics has many advantages in a large scale \gls{its}.
+So when the \gls{its} matures, such capabilities must be added.
+
+Out model supports explicit definitions for prerequisite relations, in terms of skills or prerequisite relations between tasks or task classes.
+Maybe this prerequisite model can be used to define a bayesian belief network.
+In that case statistical update rules may be defined to update the student model.
+
+

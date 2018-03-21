@@ -1,0 +1,238 @@
+
+
+The reader is referred to ``Ten steps to complex learning'' (\cite{kirschner_2013}) for a complete description of the \gls{tensteps}.
+In this chapter we will go over the steps and cherry-pick aspects applicable to functional programming, Haskell, Domain Reasoners and ITSs in general.
+
+\subsection{Step 1 Design learning tasks}
+Learning tasks should reflect real-life tasks, but usually in a simulated or abstracted environment.
+Simulated environments provide better control over the learning experience.
+It does not have to fully match the real world. We can avoid irrelevant distractions and complexity.
+The term low, medium and high fidelity is introduced to order simulated environments.
+A learning task is defined with:
+\begin{itemize}
+\item a given situation
+\item a goal
+\item a set of acceptable solutions
+\item a problem solving process
+\end{itemize}
+There are different types of learning tasks. Some examples in a tutor could be:
+
+\begin{description}
+\item[Worked-out example]  Hutton presents the length example in his textbook.
+\item[Reverse] We can give the solution to the student and ask what it is supposed to do. The student has to predict the given situation.
+This is probably very valuable as programmers spend much time reading code. 
+Functional programs can be difficult to understand, as they are written on a high abstraction level.
+\item[Imitation] The tutor demonstrates the solution process. IDEAS domain reasoners can generate a worked out solution.
+\item[Completion task] The learner receives an incomplete solution and is requested to complete it. 
+We have seen that often multiple solutions are possible. Suppose we want to assure the student understands folds.
+In that case we can let him define the function argument in the fold solution of length.
+\item[Conventional task] The learner is assigned the task to define a length function and is free to find any solution.
+\end{description}
+
+The \gls{tensteps} mentions techniques for scaffolding and fading. These can be applied to \glspl{its} as well.
+\begin{description}
+\item[Thinking aloud] The tutor or student explicitly specifies the steps taken. \\
+First define a type signature. \\
+Enumerate the base cases. \\
+Implement each base case.\\
+Implement the general cases.\\
+This can be faded during task class execution.
+\item[Apply performance constraints] Block learner actions not necessary. In case multiple solutions are possible the student is forced to choose one.
+The HEE tutor \citep{tutorHEE} can enforce different evaluation orders for expression evaluation.
+\item[Partial solutions] Start with a fully worked example and work via completion tasks towards a complete task.
+\end{description}
+
+The \gls{tensteps} is based on inductive learning. 
+Induction is the process in the mind of building up cognitive schemas from concrete examples. 
+Discrimination goes in the opposite direction, recognising differences (\cite{Lewis198526}).
+For example, to explain what a triangle is, a teacher might draw some triangles.
+To discriminate, some non-examples are needed such as circles and quadrangles.
+Variation is important, if only equilateral triangles are shown a learner may not recognise other triangles.
+This requires subtle learning task design and sequencing and support.
+Learning is better when tasks and topics are alternated, but this can also be also confusing and work counterproductive without proper support.
+
+\subsubsection{Mapping learning tasks to the IDEAS framework}
+A domain reasoner contains a set of exercises and per exercise a set  of examples.
+The examples may be a fixed set, generated at random or entered as an ad-hoc expression.
+These exercises of a domain reasoner are mapped to learning tasks in the \gls{tensteps}.
+
+
+
+
+\subsection{Step 2 Develop assessment Instruments}
+Assessment is based on performance objectives on skills.
+
+\label{c02:objectives}
+Performance objectives consist of:
+\begin{itemize}
+\item Tools and objects used.
+\item A set of given conditions.
+\item An action given by a verb.
+\item A set of conditions that must be satisfied.
+\end{itemize}
+
+To determine achievement of any objective we must be able to observe the action.
+For example ``to know'' is not a suitable action verb, but there are verbs that are an indication schema development.
+These are verbs such as compare, discriminate, select and list.
+Other verbs are an indication of rule development, for instance create, design and formulate.
+
+A set of constituent skills are needed to successfully execute a task.  
+The skills can be decomposed vertically or horizontally.
+Vertical relationships are prerequisite skills, e.g. a student should understand lists before recursion.
+Horizontal relationships are skills that can be exercised in a specific order, simultaneous or in any order (transposable). 
+ 
+\subsubsection{Assessment with domain reasoners}
+
+Recording the achievement of objectives is the major functionality of any student model.
+In an \gls{its} observable means that we must derive information from the log.
+The domain reasoner or a user interface can log the messages interchanged with the student.
+The domain reasoner provides many services. 
+The one that is important here is the service to diagnose an expression entered by a student.
+Possible replies are \citep{ideas1}:
+ \begin{itemize}
+\item Syntax - a syntax error occurred.
+\item Buggy - The student applied a buggy rule indicating some kind of misconception.
+\item NotEquivalent - The expression will give another outcome.
+\item Similar - similar to the last expression in the derivation.
+\item Expected - this answer is correct and expected by the strategy.
+\item Detour - some rule was applied correctly, but not expected.
+\item Correct - The expression is probably correct, but we could not determine which rule was applied.
+\end{itemize}
+Suppose that  domain reasoner contains a rule like for example  \textsc{AddExp} (from \cite{ideas1}).
+We can "reverse engineer"  a performance objective like: given a start expression like {\textless}beginexpression{\textgreater} the student can apply \textsc{AddExp} 
+and determine the correct answer.
+From the student log we can determine the successful achievement of this objective by applying a set of rules.
+The instructional design task is to formulate performance objectives in a topdown fashion, decompose the objectives in constituent skills, and translate these in objectives for a domain reasoner.
+
+
+\subsection {Step 3 Sequence learning tasks}
+The sequencing of learning tasks is called outer loop design.
+VanLehn allready wrote an extensive article  on inner and outer loop, which does not contradict with the \gls{tensteps} \citep{vanlehn2006}. 
+The first aspect is that there are multiple levels, following the \gls{tensteps} we have learning tasks organised in task classes.
+Let us see how this might work out in the case of a functional programming curriculum following the book \citep{hutton_2016}.
+The first mapping to the \gls{tensteps} would be to map each chapter to a task class leaving the course design from Hutton intact. 
+Within the task class the learner receives procedural support that fades away. 
+If the learner can do exercises without support he is ready to proceed to the next task class.
+Theoretically the task classes form a directed acyclic graph from the point of view of prerequisite knowledge.
+In the case of the first eight chapters from Hutton this becomes a sequential graph, as it will only frustrate students if they start halfway.
+VanLehn presents four common methods of task selection.
+This approach corresponds most to method 3 called mastery learning, which is adaptive in how many tasks each student does.
+VanLehn mentions that this is not desirable in class based situations. 
+Perhaps in those situations some more challenging optional exercises must be available for students who go faster perhaps in an optional task class.
+
+The fourth method is called macro-adaptation. 
+In that case exercises are selected that match the knowledge components that the student allready masters, and introduce some new components. Choosing variations would  also be a possibility that fits in the \gls{tensteps} approach.
+Macro adaptation is possible within a task class as a refinement of approach three.
+
+
+\subsection{Step 4 Design supportive information}
+Supportive information supports the learner with non-recurrent aspects of the learning tasks.
+A Systematic Approach to Problem Solving \gls{sap} is a way to solve problems in the domain.
+This is worked out out ins step 5.
+Domain models are further worked out in step 6. 
+
+As mentioned before the book of Hutton is not like a language reference manual.
+Many features of Haskell are not discussed for example record syntax. 
+For working on whole task support where people are working on realistic tasks a language reference manual or other resource is needed.
+
+
+\subsection{Step 5 Analyze cognitive strategies}
+Cognitive strategies help when a student encounters an aspect in a problem that he has not seen before.
+The student has to take a step back and apply strategic knowledge to find a solution.
+The \gls{tensteps} describes procedure to analyse \glspl{sap}  by interviewing domain experts.
+
+A domain reasoner can be considered a very formal kind of \gls{sap}.
+The \gls{tensteps} advices to analyse strategies by interviewing a domain expert users and let him think aloud to discover strategies.
+However domain reasoners work in domains where often formal solutions are available.
+Also then rules of the thumb remain important.
+
+
+\subsection{Step 6 Analyze mental models}
+
+\label{c02:mental}
+Analyzing mental models is necessary to create supportive information.
+In the \gls{tensteps} it is an optional step, only needed if no materials exist.
+In our example on recursion the textbook \citep{Hinze2007} would be adequate.
+
+For an \gls{its} we need a domain model as a basis for the student model.
+This domain model can be used as basis for a student model in an \gls{its}.
+A domain model can be created as an hierarchical concept map, or as semantic ontology model.
+Many \glspl{its} use ontologies in student models \citep{ontology}.
+Step 6 distinguishes three way to structure a domain model.
+
+Structural model  domain concepts and their structural relations.
+Relations can be kind-of, part-of or time-space relations.
+A structural model in  functional programming tutor might describe language syntax, or prelude structure.
+
+A causal model describes cause and effect relationships.
+In an engineering context this is usually called a functional model, because it describes how something works.
+Lazy and strict evaluation, recursion lambda's and higher order functions are examples of functional models.
+These models are used to predict what will happen or explain why something goes wrong.
+
+Some domain concepts are the following:
+\begin{itemize}
+\item Recursion. \\
+Variations of recursion are recursion on integers, on lists or  multiple recursion on other datastructures. 
+This is recursion on lists.
+\item High order functions. \\
+Functions can be used as argument to other functions, returned as result or put in datastructures such as lists.
+\item Program syntax.
+\begin{itemize}
+\item Pattern matching.
+\item Function type specification.
+\item If expressions.
+\item Data type definitions.
+\item List comprehensions
+\end{itemize}
+\item Prelude definitions
+\begin{itemize}
+\item folds: fold,  foldl, foldr
+\item map 
+\item Mathematic: max, min, sin, cos
+\end{itemize}
+
+
+\end{itemize}
+
+
+\subsubsection{Mapping mental models to student models}
+The most common student model is an overlay model.
+In this model each a value is added to each concept which is an indication for the students knowledge of the concept.
+
+
+
+
+\subsection{Step 7 Design procedural information}
+Procedural information is one of the four components.
+We have seen that procedural support is always available but fades away.
+A domain reasoner must provide this support.
+More exercises and more practice leads in general to a better performance.
+
+It is presented in a Just In Time (JIT) fashion.
+It focusses on the recurrent aspects of the learning task, these must be carried out automatically.
+
+There are some ways a domain reasoner can provide procedural information.
+In the beginning of a task class we may want to give a demonstration. 
+The derivation service can give a demonstration for an exercise.
+
+A onefirst service give an example of a next step that can be taken.
+An Applicable show all the rules that can be applied.
+These services can be called when the student is stuck.
+A diagnose service can provide feedback when the student tries a next step.
+
+The most difficult decision is when to give unsolicited just in time information.
+This can be done during an exercise, or in advance.
+If given in advance the learner must memoize the rules.
+During an exercise the tutor can give a parallel example of another case  that the learner has to imitate.
+
+
+
+\subsection{Step 8 Analyze cognitive rules}
+
+
+\subsection{Step 9 Analyze prerequisite knowledge}
+
+
+\subsection{Step 10 Design Part-task practice}
+
+

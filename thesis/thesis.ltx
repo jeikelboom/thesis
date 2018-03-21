@@ -1,0 +1,72 @@
+\documentclass[11pt, oneside]{report}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   		% ... or a4paper or a5paper or ... 
+\usepackage[toc,page]{appendix}
+
+\usepackage{enumerate}
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\usepackage{float}
+\usepackage[singlelinecheck=false]{caption}		
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{mylhs2tex}
+
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{hyperref}
+%\usepackage{subfig}
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+\setcitestyle{authoryear,open={(},close={)}}
+
+%\usepackage{hyperref}
+\usepackage[nonumberlist,nopostdot]{glossaries} 
+
+\usepackage{listings}
+\usepackage{verbatim}
+\makeglossaries
+\loadglsentries{glossary}
+%\loadglsentries[main]{glossary}
+\usepackage{makecell}
+
+
+\includeonly{
+	c00titlepage,
+	c01introduction,
+	c02context, 
+	c03btheory, 
+	c04validation,
+	c05conclusion
+	}
+
+\DeclareMathOperator{\addjoin}{{<}\!{+}\!{>}}
+\DeclareMathOperator{\rulearrow}{{=}{--}{>}}
+
+\begin{document}
+\newtheorem{definition}{Definition}
+%\newfloat{listing}{H}{hcd}
+\newfloat{Listing}{H}{hcd}
+%\newfloat{figure}{H}{hcd}
+\newfloat{Figure}{H}{hcd}
+\renewcommand{\figurename}{Figure}
+
+\include{c00titlepage}
+\tableofcontents
+\include{c01introduction}
+\include{c02context}
+\include{c03btheory}
+\include{c04validation}
+\include{c05conclusion}
+\glsaddall
+\printglossaries
+%\nocite{*}
+\bibliography{tutor} 
+
+\end{document}  

@@ -1,0 +1,550 @@
+\chapter{Validation}
+\label{ch:valid}
+The purpose of this design is find a way to build a lightweight student model, that can be used with IDEAS domain reasoners.
+We use the \gls{tensteps} as a instructional framework.
+Section \ref{tsblueprint} described the blueprint four components.
+We use the blueprint to structure our educational model  (section \ref{pv4sm}).
+The model is updated with  step vector. 
+After this update  rules are executed to derive now facts, that are joined into the model.
+
+In this chapter we present some scenarios that illustrate how this system can be used.
+We have created two examples of typical domain reasoners where information from the diagnose service can be used.
+Section \ref{progtut} presents some arguments why a programming tutor differs from these cases.
+
+\section{Outer loop scenarios}
+
+
+\subsubsection{Exercises for the outer loop test}
+
+The scenarios are based on the exercises with double maxi and combined, that we described in section \ref{sec:drmaxidble}.
+
+\subsection{Educational model for task class on expression evaluation}
+
+We have to define a progress vector for the task class, with a progress vector per exercise.
+The progress vector for an exercise in this task class contain subvectors:
+
+\begin{table}[H]
+\begin{tabular}{| l | l |}
+\hline
+Exercise subvector & Progress indicator name\\
+\hline
+Prerequisites& ES.prerequisite\\
+Objectives& ES.objective\\
+Succes criteria& ES.successCriteria\\
+Progress information& DR.Rules\\
+\hline
+\end{tabular}
+\caption{ES.prerequisite}
+\label{double.obj}
+\end{table}
+
+The state of an exercise is kept in a set of boolean values.
+Below we show the possible content of the vectors.
+
+
+\subsubsection{Objectives}
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & Progress indicator value& exercise type\\
+\hline
+EX.double& True & double\\
+EX.maxi& True & maxi\\
+EX.combined& True& combined\\
+CAUS.expressionEvaluation& Comprehension& combined\\
+PRE.plus& Comprehension& double, combined\\
+PRE.gtr& Comprehension& maxi, combined\\
+SYN.if & Comprehension& maxi, combined\\
+\hline
+\end{tabular}
+\caption{Possible values in subvector ES.objective}
+\label{double.obj}
+\end{table}
+
+For each type of exercise we keep track if the student mastery.
+Successful completion of an exercise of type double is recorded with the indicator EX.double for example.
+
+We have adopted a naming convention for domain concepts with prefixes.
+The prefix CAUS is causal principle, SYN a syntax construct, and PRE the prelude.
+Depending on the exercise type we collect evidence for domain concepts.
+
+A subset of these values appears in the objectives of each exercise.
+On successful exercise completion these values are joined to the student model.
+The model is stored in subvector ES.student of the outer model.
+The student model contains domain concepts, and exercise mastery.
+
+
+
+
+
+\subsubsection{Prerequisites}
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & Progress indicator value& exercisetype\\
+\hline
+EX.double& True& maxi\\
+EX.maxi& True & combined\\
+\hline
+\end{tabular}
+\caption{Possible values in subvector ES.prerequisite}
+\label{double.obj}
+\end{table}
+
+Exercises of type double are at the beginning of the curriculum and have no prerequisites.
+An exercise of type maxi comes after double, thus the vector contains EX.double.
+The student meets the prerequisites if $\mathit{ES.student \geq  ES.prerequisite}$.
+
+There are two styles of specifying prerequisites, in terms of previous exercises (or task classes) or in terms of required skills.
+We also might specify PRE.plus as prerequisite for exercise combined.
+
+It is a matter of user interface design how this is used.
+It is not necessary to prevent students from taking the exercise, it can also be a recommendation.
+
+\subsubsection{Step vector}
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & Value& Meaning\\
+\hline
+DR.rules/RL.expr.double& 1&  Expected: rule\\
+DR.rules/RL.expr.plus& 1& Expected: rule\\
+DR.rules/RL.expr.gtr& 1& Expected: rule\\
+DR.rules/RL.expr.if& 1& Expected: rule\\
+DR.rules/RL.expr.maxi& 1& Expected: rule\\
+DR.rules/ES.error & True & Error e.g. NotEquivalent\\
+DR.created & True & the exercise is started\\
+ES.finished & True& Diagnose: Expected + finished\\
+\hline
+\end{tabular}
+\caption{Possible values in a step vector}
+\label{double.step}
+\end{table}
+
+When a step is executed a step vector is inferred from the domain reasoner response.
+Other educational components may als submit step vectors, e.q. when the student reads a page.
+The step vector contains a progress vector with the same position in the model as the exercise.
+
+We have adopted the naming convention of prefixing rule with ``RL.''.
+The step vector is added to the model (with $\addjoin$), thus we count rule executions in a subvector DR.rules.
+When the exercise is created or finished some flags are set directly in the exercise vector.
+When an error is made the indicator is placed in DR.rules and joined to the exercise level.
+
+This is just an example of a transformation from a diagnose to step vector.
+Depending on rule design other transformations are possible, or necessary.
+For example the Haskell Expression Evaluator derives rules for each element in the prelude.
+So from specific rule executions we may derive student knowledge, which might be positioned elsewhere in the model.
+Theoretically a step vector may even update the student model directly.
+
+\subsubsection{Success criteria}
+\begin{table}[H]
+\begin{tabular}{| l | l |}
+\hline
+Key & Progress indicator value\\
+\hline
+RL.expr.double& n\\
+RL.expr.plus& n\\
+RL.expr.gtr& n\\
+RL.expr.if& n\\
+RL.expr.maxi& n\\
+\hline
+\end{tabular}
+\caption{Success criteria (ES.successCriteria)}
+\label{double.success}
+\end{table}
+
+A condition for successful completion of an exercise is $\mathit{DR.rules \geq ES.successCriteria}$.
+We have exercises with double nested twice. 
+The student could just enter the final answer. 
+That is probably correct, but provides no evidence that he understands the individual steps.
+With this mechanism we make sure that rules expr.double and expr.plus are executed twice before marking the exercise successful.
+
+Some exercises have multiple solution path. 
+In that case it may be good idea to validate that each solution path evaluates to success.
+A normal student may need one demo, get it and complete the next exercise.
+A slow student may make more mistakes, and will need more attempts.
+
+
+
+
+\subsection{Guiding the student through the curriculum}
+A slow student may need more exercises or support to complete the task class.
+We stated earlier that we wanted the student to complete the exercise double and then maxi followed by combined.
+This is achieved by specifying prerequisites for exercises maxi and combined.
+
+\begin{table}[H]
+\begin{tabular}{| l | l |}
+\hline
+Key & Progress indicator value\\
+\hline
+CS.double& True\\
+\hline
+\end{tabular}
+\caption{Prerequisites for exercise maxi}
+\label{maxi.preq}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{| l | l |}
+\hline
+Key & Progress indicator value\\
+\hline
+CS.maxi& True\\
+\hline
+\end{tabular}
+\caption{Objectives for exercise maxi}
+\label{maxi.obj}
+\end{table}
+
+Tables \ref{maxi.preq} and \ref{maxi.obj} show the objectives and prerequisites of the slightly more advanced exercise maxi.
+
+What is done with prerequisites is a matter of user interface design.
+We do not assume that the student is inhibited from executing exercises for which there is no evidence in the student model.
+The user interface may query the student model at any time.
+A logical choice would be to recommend exercises for  for which the student meets the
+prerequisites, but has not yet reached the objectives. 
+
+
+?????????
+
+
+If the student does not yet feel comfortable, he can always take some extra exercises.
+Off course only exercises in state INIT can be put in a menu.
+Only one exercise must be in state BUSY, and exercises in the final states can be shown in some progress report.
+
+In this example, the student would get exercises maxi recommended after double is completed. 
+When maxi is completed, the next challenge is to attempt a combined exercise.
+
+VanLehn mentions that it is not always desirable to make the \gls{its} adaptive to student speed \citep{vanlehn2006}.
+In a class situation it is desirable to keep the class together.
+So the challenge for the instructional designer is to decide how to be adaptive.
+For example for faster students some optional more challenging exercises may be added.
+
+\subsection{Fast students and Knowledge space rule.}
+
+Suppose a student just starts with the last and most difficult exercise and completes it successfully.
+In that case it make no sense to insist on completing the other exercises that are much easier.
+We are going to update the student model backward to mark the objectives and prerequisites met.
+This works with the fast student rule (section \ref{sec:fststdntrule}).
+
+The prerequisite of combined ($\mathit{EX.maxi \; True}$) is added to $\mathit{ES.student}$.
+A second run of the rule will then fire on exercise type maxi and add ($\mathit{EX.double \; True}$).
+Then a fixpoint is reached, with all exercise types completed.
+
+The conclusion is that with this rule a fast student can be allowed to start anywhere in the curriculum.
+If he is successful, the system will not recommend exercises that are too easy. 
+This can make the \gls{its} adaptive to the entry level of students.
+
+\section{Inner loop scenarios.}
+
+For the inner loop scenarios we have created a simple domain reasoner for solving simple linear equations with integer coefficients.
+We have chosen this example because it allows us to demonstrate cases with a misconception, prerequisite problems and multiple solution strategies.
+
+\subsection{An exercise with misconceptions and variations}
+Linear equations can be solved by eliminating the $x$ variable. 
+In figure \ref{fig:deriv} derivation \#1 shows a printout of a typical correct solution.
+For each step the domain reasoner prints the name of rule that was applied.
+The students must determine the least common multiple (lcm) of the $x$-coefficents.
+Next the student must multiply the equations to make the $x$-coefficents equal to the lcm.
+One equation must be subtracted from the other, so that $y$ can be computed. 
+This can be substituted and then $x$ computed.
+
+\begin{figure}
+\begin{minipage}[t]{7cm}
+\begin{verbatim}
+Derivation #1
+6x + y = 22
+4x + 2y = 20
+   => eval.x.factors.equal
+12x + 2y = 44
+12x + 6y = 60
+   => eval.subtract.e1.from.e2
+12x + 2y = 44
+4y = 16
+   => eval.compute.y
+12x + 2y = 44
+y = 4
+   => eval.substitute.y
+12x + 8 = 44
+y = 4
+   => eval.move.constant.right
+12x = 36
+y = 4
+   => eval.compute.x
+x = 3
+y = 4
+
+\end{verbatim}
+\end{minipage}
+\begin{minipage}[t]{3cm}
+\begin{verbatim}
+Derivation #2
+6x + y = 22
+4x + 2y = 20
+   => eval.y.factors.equal
+12x + 2y = 44
+4x + 2y = 20
+   => eval.subtract.e1.from.e2
+12x + 2y = 44
+-8x = -24
+   => eval.compute.x
+12x + 2y = 44
+x = 3
+...
+Derivation #3
+...
+   => eval.substitute.y
+12x + 8 = 44
+y = 4
+   => buggy.move
+12x = 52
+y = 4
+   => eval.compute.x
+x = 4
+y = 4
+
+\end{verbatim}
+\end{minipage}
+\caption{Derivations}\label{fig:deriv}
+\end{figure}
+
+We will use this example  in three cases.
+
+\begin{description}
+\item[Variations]
+Derivation \#2 shows a variation where the $y$ is eliminated, and $x$ computed first. 
+The \gls{tensteps} advices to present multiple variations.
+We want the student to encounter both variations.
+\item[Misconception]
+Derivation \#3 show a misconception.
+After the y is substituted the student has to solve $ 12 x + 8 = 44$. 
+Student have to subtract $8$ from both sides of the equation.
+People sometimes talk about moving the $8$ to the other side.
+Some students misunderstand this and add the $8$ to get $52$.
+The domain reasoner recognises this, and a buggy rule (buggy.move) is reported back.
+ \item[Missing prerequisite]
+A prerequisite is that the student knows what a lcm is, and how to compute this.
+We may or may not have information about this in the student model, and this may or may not be accurate.
+We must see how to react in these cases.
+
+\end{description}
+
+
+\subsection{Reasoning about variations}
+\label{sec:variat}
+
+The system has a variation in that we may eliminate either $x$ or $y$.
+In both cases a different set of rules is applied.
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & PI value& Variant\\
+\hline
+RL.eval.factors.equal& True& variant xy\\
+ES.objective/VARIANT.x& True& variant xy\\
+ES.objective/VARIANT.y& True& variant xy\\
+\hline
+RL.eval.x.factors.equal&True& variant x\\
+\hline
+RL.eval.y.factors.equal&True& variant y\\
+\hline
+\end{tabular}
+\caption{Step vector values for first rule}
+\label{step.1.step}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & PI value& Variant\\
+\hline
+ES.objective/VARIANT.xy& True& variant xy\\
+\hline
+ES.objective/VARIANT.x& True& variant x\\
+\hline
+ES.objective/VARIANT.y& True& variant y\\
+\hline
+\end{tabular}
+\caption{Objectives}
+\label{step.1.obj}
+\end{table}
+
+
+One solution is to have three types of exercises, variant x, y and xy.
+The student starts with exercise of variant xy and can take any solution strategy.
+For exercises variantXY we must calculate the step vector as in the upper part of table \ref{step.1.step}.
+From the rulename we must leave out the $x$ or $y$.
+The variant must be calculated as well and entered in the objectives.
+So the student achieves two objectives VARIANT.xy and one of VARIANT.x or VARIANT.y.
+
+The specific exercise for variant x has prerequisite VARIANT.xy and objective VARIANT.x, and similar for variant y.
+Let us assume the student took variant x.
+Then the system will now recommend variant y, since variant x is already achieved.
+This works in a similar to the way we guided the student along exercises double, maxi and combined.
+
+For exercises of variant y we leave the y in the step vector.
+The student is now required to take this specific variant, so the other rule is not permitted.
+If the student eliminates the $x$ then the system must give feedback.
+The user interface can inspect the student model to detect this when $\mathit{ES.successCriteria}$ and the $\mathit{DR.Rules}$ are not comparable.
+
+
+\subsection{Reasoning about prerequisites}
+\label{sec:preqsts}
+
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & PI value\\
+\hline
+ES.prerequisite/MATH.leastCommonMultiple & Knowledge\\
+\hline
+\end{tabular}
+\caption{Prerequisite}
+\label{preq.step}
+\end{table}
+
+\subsubsection{Prerequisites missing}
+When the student starts the exercise and we do not have the evidence in the student model, an intervention can be triggered.
+The system may point this out the the student, and offer some part-task practice, if that was not allready recommended automatically. 
+Alternatively, the student may assert that he has the knowledge. 
+In both cases the student model will be updated to reflect this.
+This method can also be used to point the student to specific resources in supportive materials.
+
+\subsubsection{Evidence present}
+
+The condition may detected by a buggy rule firing.
+In that case the system may give immediate feedback.
+This is likely a slip, the exercise may be restarted.
+
+\subsection{Reasoning with misconceptions}
+
+The student moves a constant to the right by adding it instead of subtracting it.
+This is a misconception, as the equations are not equivalent.
+We can make a part-task practice with exercises on this aspect.
+
+Part-task practices can be recommended in a similar way as exercises, if the prerequisites are met, yet the objectives not achieved.
+Except in this case the prerequisite is that the student has a misconception.
+
+
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Key & PI value\\
+\hline
+DR.Buggy/BUG.wrongMove & 1\\
+\hline
+\end{tabular}
+\caption{Step vector for buggy rule}
+\label{buggy.step}
+\end{table}
+
+
+In table \ref{buggy.step} the step vector is outlined. 
+We better collect buggy rules separate, and not mix them with the DR.Rules.
+The rule fires if there are any errors when the exercise is finished.
+In fact  we must add the rule to the other rules explained in section \ref{subs:rules}.
+This means that a predicate $\mathit{ /\$exercise/DR.Buggy == bottom}$ must be added to the other three rules to make the rules mutually exclusive.
+Another option would be add the DR.Buggy action to the existing error rule and set the $\mathit{/\$exercise/DR.rules/ES.error}$ in the step vector.
+
+The name of the buggy is used in the student model to indicate the student suffered from the misconception.
+A skill FIX.wrongMove can be set as objective for the part-task practice.
+Upon completion of the part-task practice the student model will be updated and the part-task is no longer recommended.
+Part-task practices state can be inferred  with the same or similar rules as exercises.
+
+The user interface should provide feedback immediately, and it is best to terminate the exercise immediately.
+This has to deal with the situation that the error was fixed before, in that case it is a slip and a reminder should be enough.
+
+
+\section{Programming tutors}
+\label{progtut}
+
+Certain educational problems lend themselves better for implementation in an \gls{its} then others.
+Well defined problems are forexample  those in mathematics physics and computer language.
+These problems are easier to implement in an \gls{its} than for example swimming, drawing, fashion design or presentation skills.
+
+
+
+Le, Loll and Pinkwart have defined a classification scheme for  educational problems \cite{exerciseClasses}.
+Educational problems are classified in five classes:
+\begin{enumerate}
+\item problems with one single solution
+\item problems with one solution strategy which can be implemented with different variants
+\item problems with a  limited number of typical solution strategies
+\item problems with a great variety of solution strategies
+\item problems where solutions can not be verified automatically.
+\end{enumerate}
+
+The expression evaluation exercises may be classified as class one. 
+Different solution path's are possible.
+In this exercise we do not care much which path the student takes.
+
+The linear equations exercise has multiple variants of the solution, and we do care much about which variant is taken.
+So this is a class two exercise.
+Step five in the \gls{tensteps} is about cognitive strategies.
+Part of this step is finding a systematic approach to problem solving (\gls{sap}).
+The linear equation example has a well defined \gls{sap}, from which we designed the rules.
+
+Programming tutors such as \gls{askelle} are class 3.
+They do not start with a predefined strategy, but with model solutions for which a strategy is derived.
+The set of solutions is not exhaustive. 
+The student may arrive at a completely different solution, that is nevertheless completely valid.
+
+A domain reasoner like \gls{askelle} functions like a set of training wheels.
+If needed the tutor can give you a hint or a demonstration.
+Ultimately we want the student to execute the exercise without this procedural support.
+Using the techniques show before we can guide the student to exercises for which hints are turned off.
+
+A problem is how to update the student model.
+We can not count on inferences from  rule executions, as the tutor may not have recognised these.
+
+For this class of tutors we propose a constraint based update scheme.
+Domain reasoners parse the solution, and they can provide a step vector with information on solution conditions.
+This may include information on solutions correctness, syntax, prelude and language concepts used.
+For example the solutions in listing  \ref{sol2} might provide information on domain concepts.
+
+\begin{table}[H]
+\begin{tabular}{| l | l | l |}
+\hline
+Domain concept & solution nr\\
+\hline
+prelude: length &  1\\
+\hline
+syntax: if &  2\\
+prelude: null &  2\\
+\hline
+syntax: pattern matching on lists &  3\\
+syntax: where &  3\\
+concept: strict evaluation & 3\\
+concept: recursion &  3\\
+\hline
+concept: higher order function  &  4\\
+prelude: foldl &  4\\
+\hline
+\end{tabular}
+\caption{Domain concepts in different solutions}
+\label{table.cls3}
+\end{table}
+
+Table \ref{table.cls3} shows which concepts from functional programming, syntax and prelude were used in different
+solutions for the same problem.
+These concepts can be put in step vectors and used to update the student model, when the exercise is completed successfully.
+
+The updated student model can be used in a task class to steer the student towards solutions.
+In a side bar we can show a list of domain concepts that we want him to apply.
+During the course of exercises the concepts used are removed, and the student must clean the bar. 
+If another solution variant is available for an exercise we may refuse a solution that only has familiar concepts.
+Some creativity from the instructional designer helps to integrate the student model in user experience design.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
